@@ -6,6 +6,8 @@ const typeDefs = gql`
     tracksForHome: [Track!]!
     "Fetch a specific track, provided a track's ID"
     track(id: ID!): Track!
+    "Query to fetch a specific module by its ID"
+    module(id: ID!): Module!
   }
 
   "A track is a group of Modules that teaches about a specific topic"
@@ -44,7 +46,14 @@ const typeDefs = gql`
     "The module's title"
     title: String!
     "The module's length in minutes"
-    length: Int
+    length: Int @deprecated(reason: "the length field is supposed to be counted in seconds, use \'durationInSeconds\' instead")
+    "The module's length in seconds"
+    durationInSeconds: Int
+    "The URL for where the video for the module is located"
+    videoUrl: String
+    "Details about the current module"
+    content: String
+
   }
 `;
 
